@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*
+6 50
+42 49 49 35 38 41
+36 51 50 28 -1 30
+40 36 41 33 47 49
+30 250 -25 27 45 31
+48 0 0 50 50 1234
+43 41 36 29 42 29
+*/
+void exchange(int *a,int *b)
+{
+    int c=*a;
+    *a=*b;
+    *b=c;
+}
+void get_result(double sum)
+{
+    double a=sum/2;
+    int small_a=(int)a;
+    double b=a-small_a;
+    if( b>=0.5 ) printf("%d\n",small_a+1);
+    else printf("%d\n",small_a);
+}
+int main()
+{
+    int n,m;
+    scanf("%d %d",&n,&m);
+
+    int i,j;
+    int s[n][n];
+    for( i=0 ; i<n ; i++ )
+    {
+        for( j=0 ; j<n ; j++ ) scanf("%d",&s[i][j]);
+    }
+
+    for( i=0 ; i<n ; i++ )
+    {
+        int count=0;
+        int legal[n];
+        int k=0;
+        for( j=0 ; j<n ; j++ ) //构建合法的数组
+        {
+            if( s[i][j]>=0 && s[i][j]<=m )
+            {
+                count++;
+                legal[k]=s[i][j];
+                k++;
+            }
+        }
+        int max=legal[1];
+        int min=legal[1];
+        int maxnum=1;
+        int minnum=1;
+        for( j=1 ; j<count ; j++ )
+        {
+            if( legal[j]>max )
+            {
+                max=legal[j];
+                maxnum=j;
+            }
+            if( legal[j]<min )
+            {
+                min=legal[j];
+                minnum=j;
+            }
+        }
+
+        exchange(&legal[1],&legal[maxnum]); //将最大值放在legal[1]
+        for( j=1 ; j<count ; j++ ) //找到最小值，因为上一步可能会变动最小值的位置
+        {
+            if( legal[j]==min )
+            {
+                minnum=j;
+                break;
+            }
+        }
+        exchange(&legal[count-1],&legal[minnum]); //将最小值放在legal[count-1]
+
+        double aver;
+        double sum=0;
+        //求学生的平均分
+        for( j=2 ; j<count-1 ; j++ ) sum+=legal[j];
+        aver=sum/(count-3);
+        get_result(aver+legal[0]);
+    }
+
+
+	return 0;
+}
+/*
+        int max=s[i][1];
+        int min=s[i][1];
+        int maxnum;
+        int minnum;
+        for( j=1 ; j<n ; j++ )
+        {
+            if( s[i][j]>max )
+            {
+                s[i][j]=max;
+                maxnum=j;
+            }
+            if( s[i][j]<min )
+            {
+                s[i][j]=min;
+                minnum=j;
+            }
+        }
+        exchange(&s[i][1],&s[i][maxnum]);
+        exchange(&s[i][n-1],&s[i][minnum]);
+
+*/
+
