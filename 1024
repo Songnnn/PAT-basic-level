@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+    char number[10000];
+    gets(number);
+
+    int i,j;
+    char index[5];
+    for( i=0 ; number[i]!='E' ; i++ ){}
+    for( ++i,j=0 ; number[i]!='\0' ; i++,j++ ) index[j]=number[i];
+    int zhishu=atoi(index);
+
+    if( number[0]=='-' ) printf("-");
+    if( zhishu<0 ) //此处指数为0无意义
+    {
+        zhishu=0-zhishu;
+        if( zhishu==1 )
+        {
+            printf("0.%c",number[1]);
+            for( i=3 ; number[i]!='E' ; i++ ) printf("%c",number[i]);
+
+        }
+        else
+        {
+            printf("0.");
+            for( i=0 ; i<zhishu-1 ; i++ ) printf("0");
+            printf("%c",number[1]);
+            for( i=3 ; number[i]!='E' ; i++ ) printf("%c",number[i]);
+        }
+    }
+    else if( zhishu>0 )
+    {
+        int count=0;
+        for( i=3 ; number[i]!='E' ; i++ ) count++;
+        printf("%c",number[1]);
+        if( count>zhishu )//小数点后还会有数字
+        {
+            for( i=3 ; i<zhishu+3 ; i++ ) printf("%c",number[i]);
+            printf(".");
+            for( ; number[i]!='E' ; i++ ) printf("%c",number[i]);
+        }
+        else if( count==zhishu )
+        {
+            for( i=3 ; number[i]!='E' ; i++ ) printf("%c",number[i]);
+        }
+        else
+        {
+            for( i=3 ; number[i]!='E' ; i++ ) printf("%c",number[i]);
+            for( i=0 ; i<zhishu-count ; i++ ) printf("0");
+        }
+    }
+
+    return 0;
+}
