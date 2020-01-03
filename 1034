@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+#include<ctype.h>
+int myatoi(char c)
+{
+    return c-48;
+}
+
+int jiafa(int *numone,int *numtwo)
+{
+    if( numone[1]==0 && numone[2]==0 )
+    {
+        if( numtwo[0]>0 ) printf("")
+    }
+    int number[4];
+    number[3]=numone[3]*numtwo[3];
+    number[2]=numone[0]*(numone[1]*numone[3]+numone[2])*numtwo[3]+numtwo[0]*(numtwo[1]*numtwo[3]+numtwo[2])*numone[2];
+    if( number[2]>=0 ) number[0]=1;
+    else
+    {
+        number[0]=-1;
+        number[2]=0-number[2];
+    }
+    number[1]=number[2]/number[3];
+    number[2]=number[2]-number[1]*number[3];
+    if( number[0]>0 ) printf("")
+}
+void jianfa(int *numone,int *numtwo)
+void chufa(int *numone,int *numtwo)
+void chengfa(int *numone,int *numtwo)
+int main()
+{
+    char numbers[10];
+    gets(numbers);
+    int numone[4];
+    int numtwo[4];
+
+    //对第一个数做处理
+    int tag=0;
+    if( isdigit(numbers[0]) ) //如果第一个数是正数
+    {
+        numone[0]=1;
+        numone[1]=myatoi(numbers[0])/myatoi(numbers[2]);
+        numone[2]=myatoi(numbers[0])%myatoi(numbers[2]);
+        numone[3]=myatoi(numbers[2]);
+    }
+    else
+    {
+        tag=1;
+        numone[0]=-1;
+        numone[1]=myatoi(numbers[1])/myatoi(numbers[3]);
+        numone[2]=myatoi(numbers[1])%myatoi(numbers[3]);
+        numone[3]=myatoi(numbers[3]);
+    }
+    //对第二个数做处理
+    if( isdigit(numbers[4+tag]) ) //如果第二个数是正数
+    {
+        numtwo[0]=1;
+        numtwo[1]=myatoi(numbers[4+tag])/myatoi(numbers[4+tag+2]);
+        numtwo[2]=myatoi(numbers[4+tag])%myatoi(numbers[4+tag+2]);
+        numtwo[3]=myatoi(numbers[4+tag+2]);
+    }
+    else
+    {
+        numtwo[0]=-1;
+        numtwo[1]=myatoi(numbers[4+tag+1])/myatoi(numbers[4+tag+3]);
+        numtwo[2]=myatoi(numbers[4+tag+1])%myatoi(numbers[4+tag+3]);
+        numtwo[3]=myatoi(numbers[4+tag+3]);
+    }
+
+    jiafa(numone,numtwo);
+    jianfa(numone,numtwo);
+    chufa(numone,numtwo);
+    chengfa(numone,numtwo);
+
+    return 0;
+}
