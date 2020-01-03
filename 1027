@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+
+int main()
+{
+    int sum;
+    char sigh;
+    scanf("%d %c",&sum,&sigh);
+
+    int m=sqrt((sum+1)/2);
+
+    int k=m;
+    int i,j;
+    int count;
+    for( i=0 ; i<k ; i++ )
+    {
+        for( j=0 ; j<i ; j++ ) printf(" ");
+        count=2*(m-1)+1;
+        for( j=0 ; j<count ;j++ ) printf("%c",sigh);
+        printf("\n");
+        m--;
+    }
+    m=k;
+    for( i=0 ; i<k-1 ; i++ )
+    {
+        for( j=0 ; j<k-2-i ; j++ ) printf(" ");
+        count+=2;
+        for( j=0 ; j<count ;j++ ) printf("%c",sigh);
+        printf("\n");
+    }
+    int last=k*k*2-1;
+    if( last==sum ) printf("0");
+    else printf("%d",sum-last);
+    return 0;
+}
+
+
+
+
+
+
+
