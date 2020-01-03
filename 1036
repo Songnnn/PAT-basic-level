@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*
+17S=G 29K=S G.S.K
+*/
+
+int main()
+{
+    int n;
+    char c;
+    scanf("%d %c",&n,&c);
+
+    int i,j;
+    int hangshu,lieshu=n;
+    if( n%2==0 ) hangshu=n/2;
+    else hangshu=n/2+1;
+
+    for( j=0 ; j<lieshu ; j++ ) printf("%c",c);
+    printf("\n");
+
+    for( i=2 ; i<hangshu ; i++ )
+    {
+        printf("%c",c);
+        for( j=2 ; j<lieshu ; j++ ) printf(" ");
+        printf("%c\n",c);
+    }
+
+    for( j=0 ; j<lieshu ; j++ ) printf("%c",c);
+	return 0;
+}
+
+
+
+
