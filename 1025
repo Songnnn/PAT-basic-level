@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct node
+{
+    int now;
+    int number;
+    int next;
+}Node;
+
+void exchange(int *a,int *b)
+{
+    int c=*a;
+    *a=*b;
+    *b=c;
+}
+void change(Node *a,Node *b)
+{
+    exchange(&(a->next),&(b->next));
+    exchange(&(a->now),&(b->now));
+    exchange(&(a->number),&(b->number));
+}
+int findtag(Node *link,int sum,int tag)
+{
+    int i;
+    for( i=0 ; i<sum ; i++ )
+    {
+        if( tag==link[i].now ) return i;
+    }
+}
+int main()
+{
+    int start_address,start_number,length;
+    scanf("%d %d %d",&start_address,&start_number,&length);
+
+    int i,j,k;
+    Node link[start_number];
+    //读入数据
+    for( i=0 ; i<start_number ; i++ ) scanf("%d %d %d",&link[i].now,&link[i].number,&link[i].next);
+    //先把第一个节点放在link[0]上
+    change(&link[0],&link[findtag(link,start_number,start_address)]);
+    //将链表按顺序放入数组内
+    for( i=1 ; i<start_number-1 ; i++ ) change(&link[i],&link[findtag(link,start_number,link[i-1].next)]);
+    //开始反转
+    int count=0;
+    for( j=0 ; j<start_number/length ; j++ )
+    {
+        for( i=0,k=count ; i<length/2 ; i++,k++ ) change(&link[k],&link[length-1-k]);
+        count+=length;
+    }
+    //输出
+    for( i=0 ; i<start_number-1 ; i++ ) printf("%05d %d %05d\n",link[i].now,link[i].number,link[i+1].now);
+    printf("%05d %d %d",link[i].now,link[i].number,-1);
+
+    return 0;
+}
+
