@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+char *getbig(char *a)
+{
+    int length=strlen(a);
+    int i,j;
+    for( i=0 ; i<length-1 ; i++ )
+    {
+        for( j=0 ; j<length-1-i ; j++ )
+        {
+            if( a[j]<a[j+1] )
+            {
+                char b;
+                b=a[j];
+                a[j]=a[j+1];
+                a[j+1]=b;
+            }
+        }
+    }
+    return a;
+}
+char *getsmall(char *a)
+{
+    int length=strlen(a);
+    int i,j;
+    for( i=0 ; i<length-1 ; i++ )
+    {
+        for( j=0 ; j<length-1-i ; j++ )
+        {
+            if( a[j]>a[j+1] )
+            {
+                char b;
+                b=a[j];
+                a[j]=a[j+1];
+                a[j+1]=b;
+            }
+        }
+    }
+    return a;
+}
+char change(int x)
+{
+    switch( x )
+    {
+        case 0:return '0';
+        case 1:return '1';
+        case 2:return '2';
+        case 3:return '3';
+        case 4:return '4';
+        case 5:return '5';
+        case 6:return '6';
+        case 7:return '7';
+        case 8:return '8';
+        case 9:return '9';
+        default:break;
+    }
+}
+char *myitoa(int chazhi)
+{
+    char number[4];
+    if( chazhi>999 )
+    {
+        number[0]=change(chazhi/1000);
+        chazhi%=1000;
+        number[1]=change(chazhi/100);
+        chazhi%=100;
+        number[2]=change(chazhi/10);
+        chazhi%=10;
+        number[3]=change(chazhi/1);
+        return number;
+    }
+    if( chazhi<1000 && chazhi>99 )
+    {
+        number[0]='0';
+        number[1]=change(chazhi/100);
+        chazhi%=100;
+        number[2]=change(chazhi/10);
+        chazhi%=10;
+        number[3]=change(chazhi/1);
+        return number;
+    }
+    if( chazhi<100 && chazhi>9 )
+    {
+        number[0]='0';
+        number[1]='0';
+        number[2]=change(chazhi/10);
+        chazhi%=10;
+        number[3]=change(chazhi/1);
+        return number;
+    }
+    if( chazhi<10 && chazhi>0 )
+    {
+        number[0]='0';
+        number[1]='0';
+        number[2]='0';
+        number[3]=change(chazhi/1);
+        return number;
+    }
+}
+int main()
+{
+	char number[5];
+	scanf("%s",number);
+	int length=strlen(number);
+	int i,judge=0;
+	for( i=0 ; i<length-1 ; i++ )
+    {
+        if( number[i]!=number[i+1] ) judge=1;
+    }
+    char *numbers=number;
+
+    if( judge )
+    {
+        int chazhi=0;
+        while( chazhi!=6174 )
+        {
+            chazhi=atoi(getbig(numbers))-atoi(getsmall(numbers));
+            printf("%s",getbig(numbers));
+            printf(" -%s = %d\n",getsmall(numbers),chazhi);
+            numbers=myitoa(chazhi);
+        }
+    }else
+    {
+        printf("%d - %d = ",atoi(number),atoi(number));
+        for( i=0 ; i<length ; i++ ) printf("0");
+    }
+	return 0;
+}
