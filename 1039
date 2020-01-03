@@ -1,0 +1,224 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*
+ppRYYGrrYBR2258
+YrR8RrY
+
+ppRYYGrrYB225
+YrR8RrY
+*/
+
+int main()
+{
+    char get[1001];
+    char want[1001];
+
+    gets(get);
+    gets(want);
+
+    int have[62];//第一行有的
+    int haves[62];//第二行有的
+    int i;
+    for( i=0 ; i<62 ; i++ ) have[i]=0;
+    for( i=0 ; i<62 ; i++ ) haves[i]=0;
+
+    for( i=0 ; get[i]!='\0' ; i++ )
+    {
+        switch( get[i] )
+        {
+            case 'a':have[0]++;break;
+            case 'b':have[1]++;break;
+            case 'c':have[2]++;break;
+            case 'd':have[3]++;break;
+            case 'e':have[4]++;break;
+            case 'f':have[5]++;break;
+            case 'g':have[6]++;break;
+            case 'h':have[7]++;break;
+            case 'i':have[8]++;break;
+            case 'j':have[9]++;break;
+            case 'k':have[10]++;break;
+            case 'l':have[11]++;break;
+            case 'm':have[12]++;break;
+            case 'n':have[13]++;break;
+            case 'o':have[14]++;break;
+            case 'p':have[15]++;break;
+            case 'q':have[16]++;break;
+            case 'r':have[17]++;break;
+            case 's':have[18]++;break;
+            case 't':have[19]++;break;
+            case 'u':have[20]++;break;
+            case 'v':have[21]++;break;
+            case 'w':have[22]++;break;
+            case 'x':have[23]++;break;
+            case 'y':have[24]++;break;
+            case 'z':have[25]++;break;
+            case 'A':have[26]++;break;
+            case 'B':have[27]++;break;
+            case 'C':have[28]++;break;
+            case 'D':have[29]++;break;
+            case 'E':have[30]++;break;
+            case 'F':have[31]++;break;
+            case 'G':have[32]++;break;
+            case 'H':have[33]++;break;
+            case 'I':have[34]++;break;
+            case 'J':have[35]++;break;
+            case 'K':have[36]++;break;
+            case 'L':have[37]++;break;
+            case 'M':have[38]++;break;
+            case 'N':have[39]++;break;
+            case 'O':have[40]++;break;
+            case 'P':have[41]++;break;
+            case 'Q':have[42]++;break;
+            case 'R':have[43]++;break;
+            case 'S':have[44]++;break;
+            case 'T':have[45]++;break;
+            case 'U':have[46]++;break;
+            case 'V':have[47]++;break;
+            case 'W':have[48]++;break;
+            case 'X':have[49]++;break;
+            case 'Y':have[50]++;break;
+            case 'Z':have[51]++;break;
+            case '0':have[52]++;break;
+            case '1':have[53]++;break;
+            case '2':have[54]++;break;
+            case '3':have[55]++;break;
+            case '4':have[56]++;break;
+            case '5':have[57]++;break;
+            case '6':have[58]++;break;
+            case '7':have[59]++;break;
+            case '8':have[60]++;break;
+            case '9':have[61]++;break;
+            default:break;
+        }
+    }
+
+    for( i=0 ; want[i]!='\0' ; i++ )
+    {
+        switch( want[i] )
+        {
+            case 'a':haves[0]++;break;
+            case 'b':haves[1]++;break;
+            case 'c':haves[2]++;break;
+            case 'd':haves[3]++;break;
+            case 'e':haves[4]++;break;
+            case 'f':haves[5]++;break;
+            case 'g':haves[6]++;break;
+            case 'h':haves[7]++;break;
+            case 'i':haves[8]++;break;
+            case 'j':haves[9]++;break;
+            case 'k':haves[10]++;break;
+            case 'l':haves[11]++;break;
+            case 'm':haves[12]++;break;
+            case 'n':haves[13]++;break;
+            case 'o':haves[14]++;break;
+            case 'p':haves[15]++;break;
+            case 'q':haves[16]++;break;
+            case 'r':haves[17]++;break;
+            case 's':haves[18]++;break;
+            case 't':haves[19]++;break;
+            case 'u':haves[20]++;break;
+            case 'v':haves[21]++;break;
+            case 'w':haves[22]++;break;
+            case 'x':haves[23]++;break;
+            case 'y':haves[24]++;break;
+            case 'z':haves[25]++;break;
+            case 'A':haves[26]++;break;
+            case 'B':haves[27]++;break;
+            case 'C':haves[28]++;break;
+            case 'D':haves[29]++;break;
+            case 'E':haves[30]++;break;
+            case 'F':haves[31]++;break;
+            case 'G':haves[32]++;break;
+            case 'H':haves[33]++;break;
+            case 'I':haves[34]++;break;
+            case 'J':haves[35]++;break;
+            case 'K':haves[36]++;break;
+            case 'L':haves[37]++;break;
+            case 'M':haves[38]++;break;
+            case 'N':haves[39]++;break;
+            case 'O':haves[40]++;break;
+            case 'P':haves[41]++;break;
+            case 'Q':haves[42]++;break;
+            case 'R':haves[43]++;break;
+            case 'S':haves[44]++;break;
+            case 'T':haves[45]++;break;
+            case 'U':haves[46]++;break;
+            case 'V':haves[47]++;break;
+            case 'W':haves[48]++;break;
+            case 'X':haves[49]++;break;
+            case 'Y':haves[50]++;break;
+            case 'Z':haves[51]++;break;
+            case '0':haves[52]++;break;
+            case '1':haves[53]++;break;
+            case '2':haves[54]++;break;
+            case '3':haves[55]++;break;
+            case '4':haves[56]++;break;
+            case '5':haves[57]++;break;
+            case '6':haves[58]++;break;
+            case '7':haves[59]++;break;
+            case '8':haves[60]++;break;
+            case '9':haves[61]++;break;
+            default:break;
+        }
+    }
+
+    int tag=0;
+    for( i=0 ; i<62 ; i++ )
+    {
+        if( have[i]<haves[i] )
+        {
+            tag=1; //不够
+            break;
+        }
+    }
+
+    int sum=0;
+    if( tag ) //不够
+    {
+        printf("No ");
+        for( i=0 ; i<62 ; i++ )
+        {
+            if( have[i]<haves[i] )
+            {
+                int cha=haves[i]-have[i];
+                sum+=cha;
+            }
+        }
+    }
+    else
+    {
+        printf("Yes ");
+        for( i=0 ; i<62 ; i++ )
+        {
+            if( have[i]>haves[i] )
+            {
+                int cha=have[i]-haves[i];
+                sum+=cha;
+            }
+        }
+    }
+    printf("%d",sum);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
