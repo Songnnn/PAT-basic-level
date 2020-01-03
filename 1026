@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int main()
+{
+    double start,end;
+    scanf("%lf %lf",&start,&end);
+
+    double span=(end-start)/100;
+    double hour1=(span/60)/60;
+    int hour2=(span/60)/60;
+    if( hour1==hour2 ) printf("%02d:00:00",hour2);
+    else
+    {
+        printf("%02d:",hour2);
+        double minute1=(span-hour2*60*60)/60;
+        int minute2=(span-hour2*60*60)/60;
+        if( minute1==minute2 ) printf("%02d:00",minute2);
+        else
+        {
+            printf("%02d:",minute2);
+            double second1=span-hour2*60*60-minute2*60;
+            int second2=span-hour2*60*60-minute2*60;
+            if( second1==second2 ) printf("%02d",second2);
+            else printf("%02d",second2+1);
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
