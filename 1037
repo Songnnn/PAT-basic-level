@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*
+17S=G 29K=S G.S.K
+*/
+
+int main()
+{
+    int should_pay[4];
+    int real_pay[4];
+    int i;
+
+    scanf("%d.%d.%d",&should_pay[1],&should_pay[2],&should_pay[3]);
+    should_pay[0]=should_pay[1]*17*29+should_pay[2]*29+should_pay[3];
+    scanf("%d.%d.%d",&real_pay[1],&real_pay[2],&real_pay[3]);
+    real_pay[0]=real_pay[1]*29*17+real_pay[2]*29+real_pay[3];
+
+    if( real_pay[0]<should_pay[0] )
+    {
+        printf("-");
+        int a=real_pay[0];
+        real_pay[0]=should_pay[0];
+        should_pay[0]=a;
+    }
+    else if( real_pay[0]==should_pay[0]) printf("0.0.0");
+
+    int chazhi=real_pay[0]-should_pay[0];
+    int G=chazhi/29/17;
+    int S,K;
+    printf("%d.",G);
+    if( G==0 )
+    {
+        S=chazhi/29;
+        if( S==0 ) printf("0.%d",chazhi);
+        else
+        {
+            printf("%d.",S);
+            K=chazhi-S*29;
+            printf("%d",K);
+        }
+    }
+    else
+    {
+        int rest=chazhi-G*29*17;
+        S=rest/29;
+        if( S==0 ) printf("0.%d",rest);
+        else
+        {
+            printf("%d.",S);
+            K=rest-S*29;
+            printf("%d",K);
+        }
+    }
+
+
+	return 0;
+}
+
+
+
+
