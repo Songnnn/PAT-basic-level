@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    int num[n];
+    int i;
+    for( i=0 ; i<n ; i++ ) scanf("%d",&num[i]);
+
+    int s1=0;
+    int s2=0,count2=0; //s2的结果有可能为0
+    int s3=0;
+    double s4=0,count4=0;
+    int s5=-1;
+    for( i=0 ; i<n ; i++ )
+    {
+        if( num[i]%10==0 ) s1+=num[i];
+
+        if( (num[i]-1)%5==0 )
+        {
+            count2++;
+            if( count2%2==0 ) s2-=num[i];
+            else s2+=num[i];
+        }
+
+        if( (num[i]-2)%5==0 ) s3++;
+
+        if( (num[i]-3)%5==0 ) //仍需处理
+        {
+            count4++;
+            s4+=num[i];
+        }
+
+        if( (num[i]-4)%5==0 )
+        {
+            if( num[i]>=s5 ) s5=num[i];
+        }
+    }
+
+    if( s1==0 ) printf("N ");
+    else printf("%d ",s1);
+
+    if( s2==0 ) printf("N ");
+    else printf("%d ",s2);
+
+    if( s3==0 ) printf("N ");
+    else printf("%d ",s3);
+
+    if( s4==0 ) printf("N ");
+    else
+    {
+        double result=s4/count4;
+        printf("%.1lf ",result);
+    }
+
+    if( s5==-1 ) printf("N ");
+    else printf("%d",s5);
+
+    return 0;
+}
