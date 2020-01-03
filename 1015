@@ -1,0 +1,133 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct node
+{
+    int number;
+    struct node *next;
+}Node;
+
+void add(Node **head,int i)
+{
+    Node *p=(Node *)malloc(sizeof(Node));
+    p->number=i;
+    p->next=NULL;
+    if( *head )
+    {
+        Node *tail=*head;
+        while( tail->next ) tail=tail->next;
+        tail->next=p;
+    }
+    else *head=p;
+}
+
+void exchange(int *a,int *b)
+{
+    int c=*a;
+    *a=*b;
+    *b=c;
+}
+void Sort(Node *head,int s,int stu[][4])
+{
+    Node *p=head;
+    int i;
+    for( i=0 ; i<s ; i++ )
+    {
+        int tag=1;
+        while( p && p->next )
+        {
+            if( stu[p->number][3]<stu[p->next->number][3] )
+            {
+                exchange(&stu[p->number][0],&stu[p->next->number][0]);
+                exchange(&stu[p->number][1],&stu[p->next->number][1]);
+                exchange(&stu[p->number][2],&stu[p->next->number][2]);
+                exchange(&stu[p->number][3],&stu[p->next->number][3]);
+                tag=0;
+            }
+            else if( stu[p->number][3]==stu[p->next->number][3] )
+            {
+                if( stu[p->number][1]<stu[p->next->number][1] ) //总分相同看德分
+                {
+                    exchange(&stu[p->number][0],&stu[p->next->number][0]);
+                    exchange(&stu[p->number][1],&stu[p->next->number][1]);
+                    exchange(&stu[p->number][2],&stu[p->next->number][2]);
+                    exchange(&stu[p->number][3],&stu[p->next->number][3]);
+                    tag=0;
+                }
+                else if( stu[p->number][1]==stu[p->next->number][1] ) //德分也相同看学号
+                {
+                    if( stu[p->number][0]>stu[p->next->number][0] )
+                        {
+                            exchange(&stu[p->number][0],&stu[p->next->number][0]);
+                            exchange(&stu[p->number][1],&stu[p->next->number][1]);
+                            exchange(&stu[p->number][2],&stu[p->next->number][2]);
+                            exchange(&stu[p->number][3],&stu[p->next->number][3]);
+                            tag=0;
+                        }
+                }
+            }
+            p=p->next;
+        }
+        if( tag ) break;
+        p=head;
+    }
+    p=head;
+    while( p )
+    {
+        printf("%d %d %d\n",stu[p->number][0],stu[p->number][1],stu[p->number][2]);
+        p=p->next;
+    }
+}
+int main()
+{
+    int num,low,high;
+    scanf("%d %d %d",&num,&low,&high);
+
+    int s1=0;
+    int s2=0;
+    int s3=0;
+    int s4=0;
+    Node *head1=NULL;
+    Node *head2=NULL;
+    Node *head3=NULL;
+    Node *head4=NULL;
+    int students[num][4];
+    int i;
+
+    for( i=0 ; i<num ; i++ )
+    {
+        scanf("%d %d %d",&students[i][0],&students[i][1],&students[i][2]);
+        students[i][3]=students[i][1]+students[i][2];
+        if( students[i][1]>=low && students[i][2]>=low )
+        {
+            if( students[i][1]>=high && students[i][2]>=high ) //第一类
+            {
+                s1++;
+                add(&head1,i);
+            }
+            else if( students[i][1]>=high && students[i][2]<high )
+            {
+                s2++;
+                add(&head2,i);
+            }
+            else if( students[i][1]<high && students[i][2]<high && students[i][1]>=students[i][2] )
+            {
+                s3++;
+                add(&head3,i);
+            }
+            else
+            {
+                s4++;
+                add(&head4,i);
+            }
+        }
+    }
+    printf("%d\n",s1+s2+s3+s4);
+    Sort(head1,s1,students);
+    Sort(head2,s2,students);
+    Sort(head3,s3,students);
+    Sort(head4,s4,students);
+
+    return 0;
+}
