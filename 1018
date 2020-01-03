@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+int main()
+{
+    int sum;
+    scanf("%d",&sum);
+    char result[sum][2];
+    int i;
+    for( i=0 ; i<sum ; i++ ) scanf("%c %c",&result[i][0],&result[i][1]);
+
+    int jiac,jiaj,jiab;
+    jiac=jiaj=jiab=0;
+    int yic,yij,yib;
+    yic=yij=yib=0;
+
+    int ping,jiaying,jiashu;
+    ping=jiaying=jiashu=0;
+    for( i=0 ; i<sum ; i++ )
+    {
+        switch( result[i][0] )
+        {
+            case 'C':
+            switch( result[i][1] )
+            {
+                case 'C':ping++;break;
+                case 'J':jiaying++;jiac++;break;
+                case 'B':jiashu++;yib++;break;
+                default:break;
+            }
+            case 'B':
+            switch( result[i][1] )
+            {
+                case 'C':jiaying++;jiab++;break;
+                case 'J':jiashu++;yij++;break;
+                case 'B':ping++;break;
+                default:break;
+            }
+            case 'J':
+            switch( result[i][1] )
+            {
+                case 'C':jiashu++;yic++;break;
+                case 'J':ping++;break;
+                case 'B':jiaying++;jiaj++;break;
+                default:break;
+            }
+        }
+    }
+    printf("%d %d %d\n",jiaying,ping,jiashu);
+    printf("%d %d %d\n",jiashu,ping,jiaying);
+    if( jiab>jiac )
+    {
+        if( jiab>=jiaj ) printf("B ");
+        else printf("J ");
+    }
+    else if( jiab<jiac )
+    {
+        if( jiac<jiaj ) printf("J ");
+        else printf("C ");
+    }
+    else  //jiab==jiac
+    {
+        if( jiab>=jiaj) printf("B ");
+        else printf("J ");
+    }
+
+    if( yib>yic )
+    {
+        if( yib>=yij ) printf("B");
+        else printf("J");
+    }
+    else if( yib<yic )
+    {
+        if( yic<yij ) printf("J");
+        else printf("C");
+    }
+    else  //yib==yic
+    {
+        if( yib>=yij) printf("B");
+        else printf("J");
+    }
+    return 0;
+}
