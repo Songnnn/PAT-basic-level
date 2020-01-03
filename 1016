@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int get(int a,int count)
+{
+    int s=0;
+    while( count>0 )
+    {
+        s+=a;
+        a*=10;
+        count--;
+    }
+    return s;
+}
+
+int main()
+{
+    char A[10],B[10];
+    char DA,DB;
+    scanf("%s %c %s %c",A,&DA,B,&DB);
+    int count1,count2;
+    count1=count2=0;
+
+    int i;
+    for( i=0 ; A[i]!='\0' ; i++ )
+    {
+        if( A[i]==DA ) count1++;
+    }
+
+    for( i=0 ; B[i]!='\0' ; i++ )
+    {
+        if( B[i]==DB ) count2++;
+    }
+    if( count1==0 && count2==0 ) printf("0");
+    else
+    {
+        int a,b;
+        switch( DA )
+        {
+            case '0':a=0;break;
+            case '1':a=1;break;
+            case '2':a=2;break;
+            case '3':a=3;break;
+            case '4':a=4;break;
+            case '5':a=5;break;
+            case '6':a=6;break;
+            case '7':a=7;break;
+            case '8':a=8;break;
+            case '9':a=9;break;
+            default:break;
+        }
+        switch( DB )
+        {
+            case '0':b=0;break;
+            case '1':b=1;break;
+            case '2':b=2;break;
+            case '3':b=3;break;
+            case '4':b=4;break;
+            case '5':b=5;break;
+            case '6':b=6;break;
+            case '7':b=7;break;
+            case '8':b=8;break;
+            case '9':b=9;break;
+            default:break;
+        }
+        printf("%d",get(a,count1)+get(b,count2));
+    }
+    return 0;
+}
