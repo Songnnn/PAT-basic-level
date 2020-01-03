@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+    char strs[4][60];
+    int i;
+    for( i=0 ; i<4 ; i++ ) scanf("%s",strs[i]);
+
+    char day;
+    char hour;
+    int minute;
+    for( i=0 ; i<60 ; i++ )
+    {
+        if( strs[0][i]==strs[1][i] )
+        {
+            if( strs[1][i]>='A' && strs[1][i]<='Z' )
+            {
+                day=strs[0][i];
+                break;
+            }
+        }
+    }
+    for( i++ ; i<60 ; i++ )
+    {
+        if( strs[0][i]==strs[1][i] )
+        {
+            hour=strs[0][i];
+            break;
+        }
+    }
+    for( i=0 ; i<60 ; i++ )
+    {
+        if( strs[2][i]==strs[3][i] )
+        {
+            if( strs[2][i]>='a'&&strs[2][i]<='z' )
+            {
+                minute=i;
+                break;
+            }
+            if( strs[2][i]>='A'&&strs[2][i]<='Z' )
+            {
+                minute=i;
+                break;
+            }
+        }
+    }
+
+    switch( day )
+    {
+        case 'A':printf("MON ");break;
+        case 'B':printf("TUE ");break;
+        case 'C':printf("WED ");break;
+        case 'D':printf("THU ");break;
+        case 'E':printf("FRI ");break;
+        case 'F':printf("SAT ");break;
+        case 'G':printf("SUN ");break;
+        default:break;
+    }
+
+    switch( hour )
+    {
+        case '0':printf("00:");break;
+        case '1':printf("01:");break;
+        case '2':printf("02:");break;
+        case '3':printf("03:");break;
+        case '4':printf("04:");break;
+        case '5':printf("05:");break;
+        case '6':printf("06:");break;
+        case '7':printf("07:");break;
+        case '8':printf("08:");break;
+        case '9':printf("09:");break;
+        case 'A':printf("10:");break;
+        case 'B':printf("11:");break;
+        case 'C':printf("12:");break;
+        case 'D':printf("13:");break;
+        case 'E':printf("14:");break;
+        case 'F':printf("15:");break;
+        case 'G':printf("16:");break;
+        case 'H':printf("17:");break;
+        case 'I':printf("18:");break;
+        case 'J':printf("19:");break;
+        case 'K':printf("20:");break;
+        case 'L':printf("21:");break;
+        case 'M':printf("22:");break;
+        case 'N':printf("23:");break;
+        default:break;
+    }
+    if( minute<10 ) printf("0%d",minute);
+    else printf("%d",minute);
+    return 0;
+}
