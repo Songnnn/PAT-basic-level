@@ -1,0 +1,165 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+/*
+6 6 7
+01234 880
+a1903 199
+ydjh2 200
+wehu8 300
+dx86w 220
+missing 400
+ydhfu77 99
+wehu8 55
+ydjh2 98
+dx86w 88
+a1903 86
+01234 39
+ydhfu77 88
+a1903 66
+01234 58
+wehu8 84
+ydjh2 82
+missing 99
+dx86w 81
+*/
+typedef struct student
+{
+    char id_number[20];
+    int online;
+    int mid_test;
+    int end_test;
+    int G;
+}stu;
+
+int correct(int mid,int end)
+{
+    double G=0.4*mid+0.6*end;
+    int c=(int)G;
+    double b=G-c;
+    if( b>=0.5 ) return c+1;
+    else return c;
+}
+
+void exchange(stu *a,stu *b) //结构体之间可以相互直接赋值，跟数组不同，此处可省
+{
+    int online,mid,end,G;
+    online=a->online;
+    mid=a->mid_test;
+    end=a->end_test;
+    G=a->G;
+    a->online=b->online;
+    a->mid_test=b->mid_test;
+    a->end_test=b->end_test;
+    a->G=b->G;
+    b->online=online;
+    b->mid_test=mid;
+    b->end_test=end;
+    b->G=G;
+    int a_length=strlen(a->id_number);
+    int b_length=strlen(b->id_number);
+    int i,j;
+    for( i=0,j=0 ; i<a_length || j<b_length ; j++,i++ )
+    {
+        char c;
+        c=(a->id_number)[i];
+        (a->id_number)[i]=(b->id_number)[j];
+        (b->id_number)[j]=c;
+    }
+    (a->id_number)[b_length]='\0';
+    (b->id_number)[a_length]='\0';
+}
+int main()
+{
+    int p,m,n;
+    scanf("%d %d %d",&p,&m,&n);
+
+    int i=0,j;
+    stu A[p];
+    int count=0;//在线分数不低于200分的人数
+    for( j=0 ; j<p ; j++ ) //读入在线编程成绩
+    {
+        getchar();
+        scanf("%s %d",A[i].id_number,&A[i].online);
+        if( A[i].online>=200 && A[i].online<=900 )
+        {
+            A[i].mid_test=-1;
+            A[i].end_test=-1;
+            A[i].G=0;
+            i++;
+            count++;
+        }
+    }
+
+    for( i=0 ; i<m ; i++ ) //读入期中考试成绩
+    {
+        char id[20];
+        int mid;
+        getchar();
+        scanf("%s %d",id,&mid);
+        for( j=0 ; j<count ; j++ )
+        {
+            if( !strcmp(A[j].id_number,id) )
+            {
+                A[j].mid_test=mid;
+                break;
+            }
+        }
+    }
+    stu good_stu[p]; //合格的学生
+    int k=0;
+    for( i=0 ; i<n ; i++ )
+    {
+        char id[20];
+        int end;
+        getchar();
+        scanf("%s %d",id,&end);
+        if( end>=0 && end<=100 )
+        {
+            for( j=0 ; j<count ; j++ )
+            {
+                if( !strcmp(A[j].id_number,id) )
+                {
+                    A[j].end_test=end;
+                    //判断该生是否合格
+                    if( A[j].mid_test>A[j].end_test ) A[j].G=correct(A[j].mid_test,A[j].end_test);
+                    else A[j].G=A[j].end_test;
+                    if( A[j].G>=60 )
+                    {
+                        good_stu[k]=A[j];
+                        k++;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    //将合格学生按其总分降序排序
+    for( i=0 ; i<k-1 ; i++ )
+    {
+        for( j=0 ; j<k-1-i ; j++ )
+        {
+            if( good_stu[j].G<good_stu[j+1].G )
+            {
+                exchange(&good_stu[j],&good_stu[j+1]);
+            }
+        }
+    }
+    for( i=0 ; i<k ; i++ )
+    printf("%s %d %d %d %d\n",good_stu[i].id_number,good_stu[i].online,good_stu[i].mid_test,good_stu[i].end_test,good_stu[i].G);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
