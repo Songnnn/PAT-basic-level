@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*
+4
+10120150912233 2 4
+10120150912119 4 1
+10120150912126 1 3
+10120150912002 3 2
+2
+3 4
+*/
+typedef struct id
+{
+    double id_number;
+    int test;
+    int real;
+}ID;
+
+int main()
+{
+    int n,m;
+    scanf("%d",&n);
+
+    ID stu[n];
+    int i;
+    double a;
+    int b,c;
+    for( i=0 ; i<n ; i++ )
+    {
+        scanf("%lf %d %d",&a,&b,&c);
+        stu[b].test=b;
+        stu[b].id_number=a;
+        stu[b].real=c;
+    }
+    scanf("%d",&m);
+    int later[m];
+    for( i=0 ; i<m ; i++ ) scanf("%d",&later[i]);
+
+    for( i=0 ; i<m ; i++ ) printf("%.0lf %d\n",stu[later[i]].id_number,stu[later[i]].real);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
