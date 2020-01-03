@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main()
+{
+    int kinds,sums;
+    scanf("%d %d",&kinds,&sums);
+    double m[3][kinds];
+
+    int i,j;
+    for( i=0 ; i<kinds ; i++ ) scanf("%lf",&m[0][i]);
+    for( i=0 ; i<kinds ; i++ )
+    {
+        scanf("%lf",&m[1][i]);
+        m[2][i]=m[1][i]/m[0][i];
+    }
+
+    for( i=0 ; i<kinds ; i++ )
+    {
+        for( j=0 ; j<kinds-i-1 ; j++ )
+        {
+            if( m[2][j]<m[2][j+1] )
+            {
+                double a0,a1,a2;
+                a0=m[0][j];
+                a1=m[1][j];
+                a2=m[2][j];
+                m[0][j]=m[0][j+1];
+                m[1][j]=m[1][j+1];
+                m[2][j]=m[2][j+1];
+                m[0][j+1]=a0;
+                m[1][j+1]=a1;
+                m[2][j+1]=a2;
+            }
+        }
+    }
+
+    double sum=0;
+    int last=0;
+    if( m[0][0]>=sums ) sum=sums;
+    else
+    {
+        for( i=0 ; i<kinds ; )
+        {
+            sum+=m[1][i];
+            last=sums-m[0][i];
+            sums-=m[0][i];
+            if( m[0][++i]>=last )
+            {
+                sum+=last*m[2][i];
+                break;
+            }
+        }
+    }
+    printf("%.2lf",sum);
+    return 0;
+}
