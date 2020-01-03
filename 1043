@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+//redlesPayBestPATTopTeePHPereatitAPPT
+int main()
+{
+    char letters[10001];
+    gets(letters);
+    char result[60000];
+    int i;
+    for( i=0 ; i<60000 ; i++ ) result[i]=' ';
+    int P=0;
+    int A=1;
+    int T=2;
+    int e=3;
+    int s=4;
+    int t=5;
+
+    for( i=0 ; letters[i]!='\0' ; i++ )
+    {
+        if( letters[i]=='P' )
+        {
+            result[P]='P';
+            P+=6;
+        }
+        else if( letters[i]=='A' )
+        {
+            result[A]='A';
+            A+=6;
+        }
+        else if( letters[i]=='T' )
+        {
+            result[T]='T';
+            T+=6;
+        }
+        else if( letters[i]=='e' )
+        {
+            result[e]='e';
+            e+=6;
+        }
+        else if( letters[i]=='s' )
+        {
+            result[s]='s';
+            s+=6;
+        }
+        else if( letters[i]=='t' )
+        {
+            result[t]='t';
+            t+=6;
+        }
+    }
+    for( i=0 ; i<60000 ; i++ )
+    {
+        if( result[i]!=' ') printf("%c",result[i]);
+    }
+    return 0;
+}
