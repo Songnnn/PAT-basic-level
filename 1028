@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+typedef struct id
+{
+    char name[5];
+    int year;
+    int month;
+    int day;
+}ID;
+
+int legal(ID one)
+{
+    if( one.year>1814 || one.year<2014 ) return 1;
+    if( one.year==1814 )
+    {
+        if( one.month>9 ) return 1;
+        if( one.month==9 )
+        {
+            if( one.day>=6 ) return 1;
+        }
+    }
+    else if( one.year==2014 )
+    {
+        if( one.month<9 ) return 1;
+        if( one.month==9 )
+        {
+            if( one.day<=6 ) return 1;
+        }
+    }
+    return 0;
+
+}
+int ifolder(ID one,ID two) //返回1表示one比two老，否则反之
+{
+    if( one.year<two.year ) return 1;
+    if( one.year==two.year )
+    {
+        if( one.month<two.month ) return 1;
+        if( one.month==two.month )
+        {
+            if( one.day<=two.day ) return 1;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int sum;
+    scanf("%d",&sum);
+
+    int i;
+    ID people[sum];
+    for( i=0 ; i<sum ; i++ )
+    {
+        fflush(stdin);
+        scanf("%s %d/%d/%d",people[i].name,&people[i].year,&people[i].month,&people[i].day);
+    }
+
+    int count;
+    ID old;
+    old.year=2015;
+    ID young;
+    young.year=1813;
+    for( i=0 ; i<sum ; i++ )
+    {
+        if( legal(people[i]) )
+        {
+            count++;
+            if( ifolder(people[i],old) ) old=people[i];
+            if( ifolder(young,people[i]) ) young=people[i];
+        }
+    }
+    printf("%d %s %s",count,old.name,young.name);
+    return 0;
+}
+
+
+
+
+
+
+
