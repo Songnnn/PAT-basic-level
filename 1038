@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,m;
+    int A[101]={0};
+    scanf("%d",&n);
+    for( int i=0 ; i<n ; i++ )
+    {
+        int score;
+        scanf("%d",&score);
+        A[score]++;
+    }
+    scanf("%d",&m);
+    for( int i=0 ; i<m ; i++ )
+    {
+        int score;
+        scanf("%d",&score);
+        if( i==m-1 ) printf("%d",A[score]);
+        else printf("%d ",A[score]);
+    }
+
+    return 0;
+
+}
