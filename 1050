@@ -1,1 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
 
+/*
+最开始想着输出只能一行一行输出
+于是考虑从下标的规律入手，太过繁琐，放弃。
+后来发现可以先在二维数组中填数再输出，妙哉。
+*/
+
+bool cmp(int a,int b)
+{
+    return a>b;
+}
+
+int num[10000][10000]={0};
+int main()
+{
+    int N;
+    scanf("%d",&N);
+    int A[N];
+    for( int i=0 ; i<N ; i++ ) scanf("%d",&A[i]);
+    sort(A,A+N,cmp);
+
+    int m,n;
+    m=(int)sqrt(N);
+    n=(int)sqrt(N);
+    if( sqrt(N)>(int)sqrt(N) ) m+=1;
+
+    int i=1,j=0; //行下标，列下标
+    int counter=0;
+    while( counter<N )
+    {
+        //向右走
+        j++;
+        while( j<=n&&num[i][j]==0 )
+        {
+            num[i][j]=A[counter];
+            j++;
+            counter++;
+        }
+        j--;
+        //向下走
+        i++;
+        while( i<=m&&num[i][j]==0 )
+        {
+            num[i][j]=A[counter];
+            i++;
+            counter++;
+        }
+        i--;
+        //向左走
+        j--;
+        while( j>=1&&num[i][j]==0 )
+        {
+            num[i][j]=A[counter];
+            j--;
+            counter++;
+        }
+        j++;
+        //向上走
+        i--;
+        while( i>=1&&num[i][j]==0 )
+        {
+            num[i][j]=A[counter];
+            i--;
+            counter++;
+        }
+        i++;
+    }
+
+    for( i=1 ; i<=m ; i++ )
+    {
+        for( j=1 ; j<=n ; j++ ) 
+        {
+            if( j==1 ) printf("%d",num[i][j]);
+            else printf(" %d",num[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
