@@ -5,6 +5,7 @@ using namespace std;
 最开始想着输出只能一行一行输出
 于是考虑从下标的规律入手，太过繁琐，放弃。
 后来发现可以先在二维数组中填数再输出，妙哉。
+m和n的取值也有讲究。
 */
 
 bool cmp(int a,int b)
@@ -22,9 +23,14 @@ int main()
     sort(A,A+N,cmp);
 
     int m,n;
-    m=(int)sqrt(N);
-    n=(int)sqrt(N);
-    if( sqrt(N)>(int)sqrt(N) ) m+=1;
+    for ( n=sqrt(N) ; n>0 ; n-- )
+	{
+		if ( N%n==0 )
+		{
+			m=N/n;
+			break;
+		}
+	}
 
     int i=1,j=0; //行下标，列下标
     int counter=0;
@@ -70,7 +76,7 @@ int main()
 
     for( i=1 ; i<=m ; i++ )
     {
-        for( j=1 ; j<=n ; j++ ) 
+        for( j=1 ; j<=n ; j++ )
         {
             if( j==1 ) printf("%d",num[i][j]);
             else printf(" %d",num[i][j]);
