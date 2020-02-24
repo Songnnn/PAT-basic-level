@@ -1,62 +1,69 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-/*
-17S=G 29K=S G.S.K
-*/
+#include<bits/stdc++.h>
+using namespace std;
+
+int cmp(int *P,int *A)
+{
+    if( A[1]>P[1] ) return 1;
+    else if( A[1]==P[1] )
+    {
+        if( A[2]>P[2] ) return 1;
+        else if( A[2]==P[2] )
+        {
+            if( A[3]>=P[3] ) return 1;
+        }
+    }
+    return 0;
+}
+
+void sub(int *A,int *B) //A-B，A比B大
+{
+    int C[4]={0};
+    if( A[3]-B[3]>=0 ) //Kn位无需借位
+    {
+        C[3]=A[3]-B[3];
+        if( A[2]-B[2]>=0 ) //Si位无需借位
+        {
+            C[2]=A[2]-B[2];
+            C[1]=A[1]-B[1];
+        }
+        else //Si位向前借位
+        {
+            C[2]=A[2]+17-B[2];
+            C[1]=A[1]-1-B[1];
+        }
+    }
+    else //Kn位向前借位
+    {
+        C[3]=A[3]+29-B[3];
+        if( A[2]-1-B[2]>=0 ) //Si位无需借位
+        {
+            C[2]=A[2]-1-B[2];
+            C[1]=A[1]-B[1];
+        }
+        else //Si位向前借位
+        {
+            C[2]=A[2]-1+17-B[2];
+            C[1]=A[1]-1-B[1];
+        }
+    }
+
+    printf("%d.%d.%d",C[1],C[2],C[3]);
+}
 
 int main()
 {
-    int should_pay[4];
-    int real_pay[4];
-    int i;
+    int P[4]={0};
+    int A[4]={0};
 
-    scanf("%d.%d.%d",&should_pay[1],&should_pay[2],&should_pay[3]);
-    should_pay[0]=should_pay[1]*17*29+should_pay[2]*29+should_pay[3];
-    scanf("%d.%d.%d",&real_pay[1],&real_pay[2],&real_pay[3]);
-    real_pay[0]=real_pay[1]*29*17+real_pay[2]*29+real_pay[3];
+    scanf("%d.%d.%d %d.%d.%d",&P[1],&P[2],&P[3],&A[1],&A[2],&A[3]);
 
-    if( real_pay[0]<should_pay[0] )
-    {
-        printf("-");
-        int a=real_pay[0];
-        real_pay[0]=should_pay[0];
-        should_pay[0]=a;
-    }
-    else if( real_pay[0]==should_pay[0]) printf("0.0.0");
-
-    int chazhi=real_pay[0]-should_pay[0];
-    int G=chazhi/29/17;
-    int S,K;
-    printf("%d.",G);
-    if( G==0 )
-    {
-        S=chazhi/29;
-        if( S==0 ) printf("0.%d",chazhi);
-        else
-        {
-            printf("%d.",S);
-            K=chazhi-S*29;
-            printf("%d",K);
-        }
-    }
+    //实付更多
+    if( cmp(P,A) ) sub(A,P);
     else
     {
-        int rest=chazhi-G*29*17;
-        S=rest/29;
-        if( S==0 ) printf("0.%d",rest);
-        else
-        {
-            printf("%d.",S);
-            K=rest-S*29;
-            printf("%d",K);
-        }
+        printf("-");
+        sub(P,A);
     }
 
-
-	return 0;
+    return 0;
 }
-
-
-
-
