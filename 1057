@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string s;
+    getline(cin, s);
+    int sum=0;
+    for( int i=0; i<s.length() ; i++ )
+    {
+        if( s[i]>='a' && s[i]<='z' ) sum+=(int)s[i]-96;
+        else if( s[i]>='A' && s[i]<='Z' ) sum+=(int)s[i]-64;
+    }
+    
+    int counter0=0;
+    int counter1=0;
+    while( sum!=0 )
+    {
+        if( sum%2==0 ) counter0++;
+        else if( sum%2==1 ) counter1++;
+        sum/=2;
+    }
+    printf("%d %d\n", counter0,counter1); 
+    return 0;
+}
