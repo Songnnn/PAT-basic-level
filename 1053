@@ -1,69 +1,36 @@
-#include<stdio.h>
-#include<stdlib.h>
-/*
-
-5 0.5 10
-6 0.3 0.4 0.5 0.2 0.8 0.6
-10 0.0 0.1 0.2 0.3 0.0 0.8 0.6 0.7 0.0 0.5
-5 0.4 0.3 0.5 0.1 0.7
-11 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1
-11 2 2 2 1 1 0.1 1 0.1 0.1 0.1 0.1
-
-*/
+#include<bits/stdc++.h>
+using namespace std;
 
 int main()
 {
     int N,D;
     double e;
     scanf("%d %lf %d",&N,&e,&D);
-    fflush(stdin);
 
-    double data[N][2*D];
-    int i,j;
-    for( i=0; i<N ; i++ )
+    int null=0; //空置户数
+    int maybeNull=0; //可能空置户数
+    for( int i=0 ; i<N ; i++ )
     {
-        for( j=0 ; j<D*2 ; j++ )
+        int days;
+        int counter=0;
+        scanf("%d",&days);
+        for( int j=0 ; j<days ; j++ )
         {
-            scanf("%lf",&data[i][j]);
-            if( getchar()=='\n' ) break;
+            double ele;
+            scanf("%lf",&ele);
+            if( ele<e ) counter++;
+        }
+        if( counter>(int)floor(days/2.0) )
+        {
+            if( days>D ) null++;
+            else maybeNull++;
         }
     }
 
-
-    int tag[N];
-    for( i=0 ; i<N ; i++ ) tag[i]=0;
-
-    for( i=0 ; i<N ; i++ )
-    {
-        int count=0;
-        for( j=1 ; j<data[i][0]+1 ; j++ )
-        {
-            if( data[i][j]<e ) count++;
-        }
-        //printf("%d\n",(int)data[i][0]/2);
-        if( count>(int)data[i][0]/2 )
-        {
-            if( data[i][0]>D ) tag[i]=-1; //空置
-            else tag[i]=0; //可能空置
-        }
-        else tag[i]=1; //不空
-    }
-
-    double sure=0,maybe=0;
-    for( i=0 ; i<N ; i++ )
-    {
-        if( tag[i]==0 ) maybe++;
-        if( tag[i]==-1 ) sure++;
-    }
-
-    double sure_index=sure/N*100;
-    double maybe_index=maybe/N*100;
-    printf("%.1lf",sure_index);
-    printf("\%"); //百分号输出不了。。。
-    printf(" %.1lf",maybe_index);
-    printf("\%");
-
-
+    printf("%.1lf",((double)maybeNull/(double)N)*100.0);
+    printf("%% ");
+    printf("%.1lf",((double)null/(double)N)*100.0);
+    printf("%%");
 
     return 0;
 }
