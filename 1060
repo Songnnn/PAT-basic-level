@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//满足有 E 天骑车超过 E 英里的最大整数 E
+
+bool cmp(int a,int b)
+{
+    return a>b;
+}
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+
+    int A[n+1];
+    for( int i=1 ; i<=n ; i++ ) scanf("%d",&A[i]);
+    sort(A+1,A+1+n,cmp);
+
+    int ans=0, p=1;
+    while( ans<=n && A[p]>p ) 
+    {
+        ans++;
+        p++;
+    }
+    printf("%d",ans);
+    return 0;
+}
