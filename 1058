@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int num(int *A)
+{
+    int counter=0;
+    for( int i=0 ; i<5 ; i++ )
+    {
+        if( A[i]==1 ) counter++;
+    }
+    return counter++;
+}
+
+int main()
+{
+    int N,M; //学生人数和题目数
+    scanf("%d %d",&N,&M);
+
+    int test[M][5]={0}; //最多5个选项
+    int score[M]={0}; //题目分数
+    int grade[N]={0}; //学生成绩
+    int wrong[M]={0}; //题目错误次数
+    for( int i=0 ; i<M ; i++ )
+    {
+        int m,n; //选项个数，答案个数
+        scanf("%d %d %d",&score[i],&m,&n);
+        char c;
+        for( int j=0 ; j<n ; j++ )
+        {
+            scanf(" %c",&c);
+            test[i][(int)c-97]=1;
+        }
+    }
+
+
+    for( int i=0 ; i<N ; i++ )
+    {
+        getchar();
+        for( int j=0 ; j<M ; j++ )
+        {
+            getchar(); //除去左括号
+            int m;
+            scanf("%d",&m);
+            int tag=1;
+            for( int k=0 ; k<m ; k++ )
+            {
+                char c;
+                scanf(" %c",&c);
+                if( m==num(test[j]) )
+                {
+                    if( test[j][(int)c-97]==0 ) tag=0;//这题做错了
+                }
+                else tag=0; //这道题做错了
+            }
+            getchar(); //除去右括号
+            if( tag ) grade[i]+=score[j];
+            else wrong[j]++;
+            if( j!=M-1 ) getchar();
+        }
+    }
+
+    for( int i=0 ; i<N ; i++ ) printf("%d\n",grade[i]);
+
+    int wmax=*max_element(wrong,wrong+M);
+    if( wmax==0 ) printf("Too simple");
+    else
+    {
+        printf("%d",wmax);
+        for( int i=0 ; i<M ; i++ )
+        {
+            if( wrong[i]==wmax ) printf(" %d",i+1);
+        }
+    }
+
+    return 0;
+}
