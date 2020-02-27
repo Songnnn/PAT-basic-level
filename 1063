@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//它们的模为实部与虚部的平方和的开方，而“谱半径”就是最大模
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+
+    double imax=0;
+    for( int i=0 ; i<n ; i++ )
+    {
+        double a,b;
+        scanf("%lf %lf",&a,&b);
+        double x=sqrt(pow(a,2)+pow(b,2));
+        if( x>imax ) imax=x;
+    }
+    
+    //%.2lf就是四舍五入取后两位
+    //if( (int)(imax*1000)%10>=5 ) imax+=0.01;
+    printf("%.2lf",imax);
+    return 0;
+}
