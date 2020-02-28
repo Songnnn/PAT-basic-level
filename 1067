@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    vector<string> answer;
+    string rightAnswer;
+    cin>>rightAnswer;
+    int n;
+    scanf("%d",&n);
+
+    getchar();
+    string str;
+    do
+    {
+        getline(cin,str);
+        answer.push_back(str);
+    }while( str!="#" );
+
+    int counter=0;
+    int i=0;
+    while( 1 )
+    {
+        if( answer[i]=="#" ) break;
+        if( answer[i]==rightAnswer )
+        {
+            printf("Welcome in");
+            break;
+        }
+        else
+        {
+            cout<<"Wrong password: "+answer[i]<<endl;
+            i++;
+            counter++;
+            if( counter==n )
+            {
+                printf("Account locked");
+                break;
+            }
+        }
+    }
+
+
+    return 0;
+}
