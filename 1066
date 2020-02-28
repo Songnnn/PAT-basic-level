@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int m,n;
+    int imin,imax;
+    int x;
+    scanf("%d %d %d %d %d",&m,&n,&imin,&imax,&x);
+
+    int A[m][n];
+    for( int i=0 ; i<m ; i++ )
+    {
+        for( int j=0 ; j<n ; j++ ) scanf("%d",&A[i][j]);
+    }
+
+    for( int i=0 ; i<m ; i++ )
+    {
+        for( int j=0 ; j<n ; j++ )
+        {
+            if( A[i][j]>=imin && A[i][j]<=imax )
+            {
+                if( j==0 ) printf("%03d",x);
+                else printf(" %03d",x);
+            }
+            else
+            {
+                if( j==0 ) printf("%03d",A[i][j]);
+                else printf(" %03d",A[i][j]);
+            }
+        }
+        printf("\n");
+    }
+
+
+    return 0;
+}
