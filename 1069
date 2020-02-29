@@ -1,0 +1,41 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<string> B; //中奖网友
+
+int exist(string str)
+{
+    for( int i=0 ; i<B.size() ; i++ )
+    {
+        if( B[i]==str ) return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    int m,n,s;
+    scanf("%d %d %d",&m,&n,&s); //转发量，中奖间隔，第一位中奖者
+
+    vector<string> A; //转发人员
+    for( int i=0 ; i<m ; i++ )
+    {
+        string str;
+        cin>>str;
+        A.push_back(str);
+    }
+
+    if( m<s ) printf("Keep going...");
+    else
+    {
+        for( int i=s-1 ; i<m ; i+=n )
+        {
+            while( exist(A[i]) && i<m ) i++;
+            if( i<m ) B.push_back(A[i]);
+        }
+    }
+
+    for( int i=0 ; i<B.size() ; i++ ) cout<<B[i]<<endl;
+
+    return 0;
+}
