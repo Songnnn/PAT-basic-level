@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    char A[21]; //进制表
+    cin>>A;
+
+    char n[21],m[21];
+    int result[21];
+    cin>>n;
+    cin>>m;
+
+    int ln=strlen(n);
+    int lm=strlen(m);
+    int counter=0; //result下标
+    int Ai=strlen(A)-1; //进制表的下标
+    int tag=0;//进位标志
+    for( int i=ln-1,j=lm-1 ; i>=0||j>=0 ; i--,j-- )
+    {
+        int ni,mi;
+        //取得n的数字
+        if( i<0 ) ni=0;
+        else ni=(int)n[i]-48;
+        //取得m的数字
+        if( j<0 ) mi=0;
+        else mi=(int)m[j]-48;
+        //取得进制表的数字
+        int dight;
+        if( (int)A[Ai]-48==0 ) dight=10;
+        else dight=(int)A[Ai]-48;
+        Ai--;
+        //进行计算
+        if( ni+mi+tag>=dight ) //产生进位
+        {
+            result[counter]=ni+mi+tag-dight;
+            tag=1;
+        }
+        else //无进位
+        {
+            result[counter]=ni+mi+tag;
+            tag=0;
+        }
+        counter++;
+    }
+     
+    if( tag==1 ) result[counter++]=1;
+    
+    //开头是0不输出
+    int flag=0;
+    for( int i=counter-1 ; i>=0 ; i-- )
+    {
+        if( result[i]!=0 ) flag=1;
+    }
+
+    if( flag==0 ) printf("0");
+    else
+    {
+        flag=0;
+        for( int i=counter-1 ; i>=0 ; i-- )
+        {
+            if( result[i]!=0 ) flag=1;
+            if( flag ) printf("%d",result[i]);
+        }
+    }
+
+    return 0;
+}
