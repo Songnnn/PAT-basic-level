@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+//纯C
+typedef struct{
+    int data;
+    int cur;
+}node,component;
+
+int main(){
+    int first,N,K,i,j;
+    int t1,t2,t3;
+    int isshuchu=0;
+    scanf("%d %d %d",&first,&N,&K);
+    node *nodes=(node*)malloc(100000*sizeof(nodes[0]));
+    
+    for(i=0;i<N;i++)
+    {
+        scanf("%d %d %d",&t1,&t2,&t3);
+        nodes[t1].data=t2;
+        nodes[t1].cur=t3;
+    }
+    i=first;
+    while(i!=-1)
+    {
+        if(nodes[i].data<0)
+        {
+            if(isshuchu==1)
+            {
+                printf(" %05d\n",i);
+                isshuchu=1;
+            }
+            printf("%05d %d",i,nodes[i].data);
+            isshuchu=1;
+        }
+        i=nodes[i].cur;
+    }
+    i=first;
+    while(i!=-1)
+    {
+        if(nodes[i].data>=0&&nodes[i].data<=K)
+        {
+            if(isshuchu==1)
+            {
+                printf(" %05d\n",i);
+                isshuchu=1;
+            }
+            printf("%05d %d",i,nodes[i].data);
+            isshuchu=1;
+        }
+        i=nodes[i].cur;
+    }
+    i=first;
+    while(i!=-1)
+    {
+        if(nodes[i].data>K)
+        {
+            if(isshuchu==1)
+            {
+                printf(" %05d\n",i);
+                isshuchu=1;
+            }
+            printf("%05d %d",i,nodes[i].data);
+            isshuchu=1;
+        }
+        i=nodes[i].cur;
+    }
+    printf(" -1");
+    return 0;
+}
