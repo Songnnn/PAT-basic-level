@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+double dis(int a,int b)
+{
+    double c=abs(a);
+    double d=abs(b);
+    double p=pow(c,2)+pow(d,2);
+    return sqrt(p);
+}
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+
+    double far=0;
+    double near=10000;
+    string farid;
+    string nearid;
+    for( int i=0 ; i<n ; i++ )
+    {
+        string id;
+        cin>>id;
+        int a,b;
+        cin>>a>>b;
+        if( dis(a,b)>far )
+        {
+            far=dis(a,b);
+            farid=id;
+        }
+        if( dis(a,b)<near )
+        {
+            near=dis(a,b);
+            nearid=id;
+        }
+    }
+
+    cout<<nearid+' '<<farid;
+    return 0;
+}
