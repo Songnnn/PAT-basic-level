@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string s;
+    int n;
+    cin >> s >> n;
+    while(--n)
+    {
+        string ans;
+        int cnt = 0; 
+        char pre = s[0];
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s[i] == pre) cnt++;
+            else
+            {
+                ans += pre;
+                ans += cnt + '0';
+                pre = s[i];
+                cnt = 1;
+            }            
+        }
+        if(cnt > 0) 
+        {
+            ans += pre;
+            ans += cnt + '0';
+        }
+        s = ans;
+    }
+    cout << s;
+    return 0;
+}
+
+//用int数组来做也可以，最后一个测试点会通不过，因为太大了，改成两个十万量级的数组交替来做可以通过。
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+    int d;
+    int n;
+    scanf("%d %d",&d,&n);
+    int A[n][1000];
+    for( int i=0 ; i<n ; i++ )
+    {
+        for( int j=0 ; j<1000 ; j++ ) A[i][j]=-1;
+    }
+    A[0][0]=d;
+
+    for( int i=0 ; i<n-1 ; i++ )
+    {
+        int j=0;
+        int tag=0; //A[i+1]的下标
+        while( A[i][j]!=-1 )
+        {
+            int counter=1;
+            while( A[i][j]==A[i][j+1] )
+            {
+                j++;
+                counter++;
+            }
+            A[i+1][tag++]=A[i][j];
+            A[i+1][tag++]=counter;
+            j++;
+        }
+    }
+
+    int i=0;
+    while( A[n-1][i]!=-1 ) printf("%d",A[n-1][i++]);
+
+    return 0;
+}
+
+*/
