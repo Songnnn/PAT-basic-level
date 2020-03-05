@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//主要是解决类似1000只能输出1的问题
+int main()
+{
+    int a,b;
+    scanf("%d %d",&a,&b);
+
+    int m=a*b;
+    int tag=0;
+    while( m>0 )
+    {
+        if( m%10!=0 ) tag=1;
+        if( tag==1 ) printf("%d",m%10);
+        m/=10;
+    }
+
+    return 0;
+}
