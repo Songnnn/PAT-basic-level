@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int get(int i)
+{
+    if( i==10 ) return 1;
+    return (i%10)*10+i/10;
+}
+
+void print(double n,int me)
+{
+    if( n>me ) printf(" Cong");
+    if( n==me ) printf(" Ping");
+    if( n<me ) printf(" Gai");
+}
+
+int main()
+{
+    int me,x,y;
+    scanf("%d %d %d",&me,&x,&y);
+
+    int i;
+    for( i=99 ; i>=10 ; i-- )
+    {
+        int yi=get(i);
+        if( abs(i-yi)==(double)yi/y*x ) break;
+    }
+
+    if( i>9 ) //有解，注意丙可能是非整数
+    {
+        printf("%d",i);
+        print((double)i,me);
+        print((double)get(i),me);
+        print((double)get(i)/y,me);
+    }
+    else printf("No Solution");
+
+    return 0;
+}
