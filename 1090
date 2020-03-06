@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,k;
+    map<int,vector<int>> m;
+    scanf("%d %d",&n,&k);
+
+    for( int i=0 ; i<n ; i++ )
+    {
+        int a,b;
+        scanf("%d %d",&a,&b);
+        m[a].push_back(b);
+        m[b].push_back(a);
+    }
+
+    for( int i=0 ; i<k ; i++ )
+    {
+        int t;
+        scanf("%d",&t);
+        int A[100000]={0};
+        vector<int> v(t);
+        int tag=0;
+        for( int j=0 ; j<t ; j++ )
+        {
+            scanf("%d",&v[j]);
+            A[v[j]]=1;
+        }
+
+        for( int j=0 ; j<t ; j++ )
+        {
+            for( int s=0 ; s<m[v[j]].size() ; s++ )
+            {
+                if( A[m[v[j]][s]]==1 )
+                {
+                    tag=1;
+                    break;
+                }
+            }
+            if( tag ) break;
+        }
+        printf("%s\n",tag?"No":"Yes");
+    }
+
+
+    return 0;
+}
