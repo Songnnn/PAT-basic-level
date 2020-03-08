@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void func(char *s,char *str,int k,int i)
+{
+    for( int j=0 ; j<k ; j++,i++ ) s[j]=str[i];
+    s[k]='\0';
+}
+
+int sushu(int x)
+{
+    for( int i=2 ; i<(int)sqrt(x) ; i++ )
+    {
+        if( x%i==0 ) return 0;
+    }
+    return 1;
+}
+
+int main()
+{
+    int l,k;
+    scanf("%d %d",&l,&k);
+    char str[l+1];
+    //getchar();
+    scanf("%s",str);
+
+    int i;
+    for( i=0 ; i<=l-k ; i++ )
+    {
+        char s[k+1];
+        func(s,str,k,i);
+        int x=atoi(s);
+        if( sushu(x) ) 
+        {
+            printf("%s",s);
+            break;
+        }
+    }
+    
+    if( i==l-k+1 ) printf("404");
+    return 0;
+}
