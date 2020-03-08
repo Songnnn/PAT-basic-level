@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+    int A[127]={0}; //asc码值为32-126
+    string a,b;
+    getline(cin,a);
+    getline(cin,b);
+
+    for( int i=0 ; i<a.size() ; i++ )
+    {
+        int x=(int)a[i];
+        if( A[x]==0 )
+        {
+            A[x]=1;
+            printf("%c",a[i]);
+        }
+    }
+
+    for( int i=0 ; i<b.size() ; i++ )
+    {
+        int x=(int)b[i];
+        if( A[x]==0 )
+        {
+            A[x]=1;
+            printf("%c",b[i]);
+        }
+    }
+
+    return 0;
+}
