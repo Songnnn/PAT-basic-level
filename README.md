@@ -1,2 +1,2 @@
 # PAT-basic-level
-PAT甲级
+PAT乙级
